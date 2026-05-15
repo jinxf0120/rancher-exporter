@@ -1,0 +1,12 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rancher-exporter-backups
+  namespace: cattle-system-exporter
+spec:
+  selector:
+    matchLabels:
+      app: rancher-exporter
+  endpoints:
+    - port: metrics
+      path: /backup-metrics
