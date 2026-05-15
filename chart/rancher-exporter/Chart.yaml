@@ -1,0 +1,11 @@
+apiVersion: v2
+name: rancher-exporter
+description: Unofficial Prometheus Exporter for Rancher
+type: application
+version: v1.0.0
+appVersion: "v1.0.0"
+home: https://github.com/jinxf0120/rancher-exporter
+sources:
+  - https://github.com/jinxf0120/rancher-exporter
+maintainers:
+  - name: jinxf0120

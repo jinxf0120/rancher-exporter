@@ -1,0 +1,46 @@
+replicaCount: 1
+
+image:
+  repository: jinxf0120/rancher-exporter
+  pullPolicy: Always
+  tag: "v1.0.0"
+
+nameOverride: ""
+fullnameOverride: ""
+
+namespace: cattle-system-exporter
+
+serviceAccount:
+  name: rancher-exporter
+
+rbac:
+  create: true
+
+env:
+  INFORMER_RESYNC_PERIOD: "300"
+  TIMER_GET_LATEST_RANCHER_VERSION: "1"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8080
+
+serviceMonitor:
+  enabled: true
+  path: /metrics
+  interval: 30s
+  scrapeTimeout: 10s
+
+serviceMonitorBackup:
+  enabled: true
+  path: /backup-metrics
+  interval: 30s
+  scrapeTimeout: 10s
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
