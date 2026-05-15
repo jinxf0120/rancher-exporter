@@ -1,0 +1,18 @@
+{{- if .Values.serviceMonitorBackup.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "rancher-exporter.fullname" . }}-backups
+  namespace: {{ .Values.namespace }}
+  labels:
+    {{- include "rancher-exporter.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "rancher-exporter.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: metrics
+      path: {{ .Values.serviceMonitorBackup.path }}
+      interval: {{ .Values.serviceMonitorBackup.interval }}
+      scrapeTimeout: {{ .Values.serviceMonitorBackup.scrapeTimeout }}
+{{- end }}
